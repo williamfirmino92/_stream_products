@@ -4,14 +4,19 @@ import { useState } from 'react';
 
 const MetaMaskConnect = () => {
   const [account, setAccount] = useState<string | null>(null);
-  const [balance, setBalance] = useState<number | null>(null);
-
+  const [balance, setBalance] = useState<string | null>(null); // mudou de number para string
 
   const handleConnect = async () => {
     try {
-      const { account, balance } = await connectWallet();
-      setAccount(account);
-      setBalance(balance);
+      const connection = await connectWallet();
+
+      if (!connection) {
+        console.error('Conexão falhou ou foi cancelada pelo usuário');
+        return;
+      }
+
+      setAccount(connection.account);
+      setBalance(connection.balance);
     } catch (error) {
       console.error('Falha ao conectar', error);
     }
@@ -19,7 +24,7 @@ const MetaMaskConnect = () => {
 
   const formatAccount = (account: string) => {
     return `${account.slice(0, 6)}...${account.slice(account.length - 4)}`;
-  }
+  };
 
   return (
     <div>
