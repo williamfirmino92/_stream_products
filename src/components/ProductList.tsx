@@ -104,7 +104,7 @@ const ProductList = () => {
             <p className="text-gray-600">{product.description}</p>
           </div>
           <div className="flex justify-between items-center p-4">
-            <p className="text-green-500 font-bold">$ {product.price} BTK</p>
+            <p className="text-green-500 font-bold">$ {product.price} TAZ</p>
             <button
               onClick={() => handleBuy(product.price)}
               className="bg-[#7e232c] text-[#ccc] py-2 px-4 rounded mt-4"
